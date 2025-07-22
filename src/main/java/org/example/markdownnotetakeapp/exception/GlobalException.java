@@ -18,4 +18,12 @@ public class GlobalException {
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR).build()
         );
     }
+
+    @ExceptionHandler(EmptyFileException.class)
+    public ResponseEntity<Error> handleEmptyFileException(EmptyFileException emptyFileException){
+        return ResponseEntity.status(400).body(new Error().builder()
+                    .message(emptyFileException.getMessage())
+                    .code(400)
+                    .httpStatus(HttpStatus.BAD_REQUEST).build());       
+    }
 }
